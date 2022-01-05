@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 require('./startup/connection')();
 const cors = require('cors');
+const userrout = require('./routs/userrout');
 const server = require('http').createServer(app)
 const port = process.env.PORT || 8000
 const socketio = require('socket.io');
@@ -11,6 +12,8 @@ const io = socketio(server, {
     }
 })
 app.use(cors());
+app.use(express.json());
+app.use('/user', userrout);
 io.on('connection', socket => {
     socket.emit('message', 'welcome to room');
     socket.broadcast.emit('message', 'joined');
@@ -18,5 +21,4 @@ io.on('connection', socket => {
         io.emit('discon', 'user-disconnected');
     })
 })
-app.get('/', (req, res) => res.send('Hello World!'))
 server.listen(port, () => console.log(`Example app listening on port ${port}!`))
