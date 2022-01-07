@@ -1,3 +1,3 @@
 {
-    "database": "mongodb://localhost:27017/mypro"
+    "database": "mongodb+srv://kanish:kanish09@rental.owmmp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }
