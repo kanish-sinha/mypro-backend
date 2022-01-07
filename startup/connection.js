@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-let databaseurl = 'mongodb://localhost:27017/mypro'
+const config = require('config');
+let databaseurl = config.get('database');
 module.exports = function() {
     mongoose.connect(databaseurl)
         .then(() => console.log('connected succesfully: ', databaseurl))

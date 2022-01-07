@@ -6,6 +6,10 @@ router.get('/alluser', async(req, res) => {
     let users = await User.find()
     res.json(users);
 })
+router.get('/one/:id', async(req, res) => {
+    let user = await User.findOne({ _id: req.params.id });
+    res.json(user);
+})
 router.post('/signup', async(req, res) => {
     let user = req.body;
     user = new User(req.body);

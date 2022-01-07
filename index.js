@@ -16,9 +16,19 @@ app.use(express.json());
 app.use('/user', userrout);
 app.use('/post', postrout);
 io.on('connection', socket => {
-    socket.on('room', (username, chatroom) => {
-        socket.join(chatroom);
-        socket.to(chatroom).emit('user-joined', username)
+    // socket.on('room', (username, chatroom) => {
+    //     let arr = username + chatroom;
+    //     arr = arr.split('');
+    //     arr = arr.sort().toString();
+    //     socket.join(arr);
+    //     socket.to(arr).emit('user-joined', username)
+    // })
+    socket.on('message', (username, chatroom, message) => {
+        let arr = username + chatroom;
+        arr = arr.split('');
+        arr = arr.sort().toString();
+        socket.join(arr);
+        socket.to(arr).emit('recieve', message)
     })
 })
 server.listen(port, () => console.log(`Example app listening on port ${port}!`))
