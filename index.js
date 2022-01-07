@@ -31,7 +31,7 @@ io.on('connection', socket => {
         let msg = new Message({
             message: username.message,
             sender: username.sender,
-            receiver: username.receiver
+            receiver: username.chatroom
         })
         await msg.save();
         arr = arr.split('');
