@@ -18,7 +18,7 @@ router.post('/login', async(req, res) => {
         return res.json(users)
     if (users.password == user.password) {
         let token = jwt.sign({ _id: users._id }, users.password)
-        res.send({ token });
+        res.json(token);
     }
 })
 module.exports = router;

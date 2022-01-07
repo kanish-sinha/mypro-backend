@@ -10,6 +10,9 @@ const postSchema = new mongoose.Schema({
     },
     content: {
         type: String
+    },
+    author: {
+        type: String
     }
 })
 const Post = mongoose.model('post', postSchema)
