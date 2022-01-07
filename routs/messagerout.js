@@ -6,9 +6,7 @@ router.get('/allmsg', async(req, res) => {
     res.json(msg);
 })
 router.get('/msg/:sender/:receiver', async(req, res) => {
-    let msg = await Message.find({ $or: [{ sender: req.params.sender }, { receiver: req.params.receiver }] });
-    let receivermsg = await Message.find({ $or: [{ sender: req.params.receiver }, { receiver: req.params.sender }] })
-    msg = msg.push(receivermsg);
+    let msg = await Message.find({ $or: [{ sender: req.params.sender }, { receiver: req.params.receiver }, { sender: req.params.receiver }] });
     res.json(msg);
 })
 module.exports = router;
