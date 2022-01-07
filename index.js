@@ -5,6 +5,7 @@ const cors = require('cors');
 const postrout = require('./routs/postrout');
 const userrout = require('./routs/userrout');
 const msgrout = require('./routs/messagerout');
+const Message = require('./models/message');
 const server = require('http').Server(app)
 const port = process.env.PORT || 8000
 const io = require('socket.io')(server, {
@@ -25,12 +26,18 @@ io.on('connection', socket => {
     //     socket.join(arr);
     //     socket.to(arr).emit('user-joined', username)
     // })
-    socket.on('message', (username, chatroom, message) => {
-        let arr = username + chatroom;
+    socket.on('message', async(username) => {
+        let arr = username.sender + username.chatroom;
+        let msg = new Message({
+            message: username.message,
+            sender: username.sender,
+            receiver: username.receiver
+        })
+        await msg.save();
         arr = arr.split('');
         arr = arr.sort().toString();
         socket.join(arr);
-        socket.to(arr).emit('recieve', message)
+        socket.to(arr).emit('recieve', username.message)
     })
 })
 server.listen(port, () => console.log(`Example app listening on port ${port}!`))
