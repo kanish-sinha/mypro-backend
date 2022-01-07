@@ -4,6 +4,7 @@ require('./startup/connection')();
 const cors = require('cors');
 const postrout = require('./routs/postrout');
 const userrout = require('./routs/userrout');
+const msgrout = require('./routs/messagerout');
 const server = require('http').Server(app)
 const port = process.env.PORT || 8000
 const io = require('socket.io')(server, {
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/user', userrout);
 app.use('/post', postrout);
+app.use('/msg', msgrout);
 io.on('connection', socket => {
     // socket.on('room', (username, chatroom) => {
     //     let arr = username + chatroom;
