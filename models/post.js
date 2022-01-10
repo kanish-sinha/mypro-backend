@@ -13,6 +13,9 @@ const postSchema = new mongoose.Schema({
     },
     author: {
         type: String
+    },
+    image: {
+        type: String
     }
 })
 const Post = mongoose.model('post', postSchema)
