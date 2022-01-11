@@ -25,7 +25,7 @@ router.patch('/update/:id', async(req, res) => {
     let like = req.body;
     let post = await Post.find({ _id: req.params.id })
     console.log(post);
-    post = req.body;
+    post = req.body.likes;
     await post.save();
     res.json(post);
 })
