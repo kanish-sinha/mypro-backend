@@ -23,7 +23,7 @@ router.delete('/:id', async(req, res) => {
 })
 router.patch('/update/:id', async(req, res) => {
     let like = req.body;
-    let post = await Post.findByIdAndUpdate(req.params.id, req.body.likes)
+    let post = await Post.findByIdAndUpdate(req.params.id, { likes: req.body.likes + 1 })
     console.log(post);
     //await post.save();
     res.json(post);
