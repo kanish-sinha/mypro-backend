@@ -10,7 +10,7 @@ router.get('/one/:id', async(req, res) => {
     res.json(post);
 })
 router.get('/user/:id', async(req, res) => {
-    let post = await Post.find({ post_by: req.params.id });
+    let post = await Post.find({ posted_by: req.params.id });
     res.json(post);
 })
 router.post('/', async(req, res) => {
