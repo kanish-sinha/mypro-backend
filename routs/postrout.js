@@ -6,7 +6,7 @@ router.get('/', async(req, res) => {
     res.json(post);
 })
 router.get('/one/:id', async(req, res) => {
-    let post = await Post.find({ _id: req.params.id }).populate('user')
+    let post = await Post.find({ _id: req.params.id }).populate('comment.user');
     res.json(post);
 })
 router.get('/user/:id', async(req, res) => {
