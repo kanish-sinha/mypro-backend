@@ -29,7 +29,10 @@ const postSchema = new mongoose.Schema({
         default: 0
     },
     comment: {
-        type: [String]
+        type: [{
+            user: { type: mongoose.Schema.Types.ObjectId, ref: User },
+            com: String
+        }]
     }
 })
 const Post = mongoose.model('post', postSchema)
